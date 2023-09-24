@@ -1,3 +1,5 @@
+import { SearchDialog } from "@/components/SearchDialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -9,8 +11,6 @@ const Index = async () => {
   const { data: chatbotsData } = await supabase
     .from("training_groups")
     .select("*, userData:user_id(metadata)");
-
-  console.log(chatbotsData);
 
   return (
     <>
@@ -32,20 +32,21 @@ const Index = async () => {
                   }`}
                 >
                   {disabled && (
-                    <p className="text-xs mb-2 text-destructive">
-                      Bot not ready
-                    </p>
+                    <span className="text-xs mb-2">
+                      Bot not ready: status -{" "}
+                      <Badge variant={"outline"}>{bot.status}</Badge>
+                    </span>
                   )}
 
                   <div className="flex flex-col gap-2">
                     {bot.image_url && (
                       <div className="h-10 w-10">
                         <Image
-                          objectFit="contain"
                           width={200}
                           height={200}
                           src={bot.image_url}
                           alt={"bot image"}
+                          className="object-contain"
                         />
                       </div>
                     )}
@@ -58,9 +59,7 @@ const Index = async () => {
                       by {bot.userData.metadata.full_name}
                     </p>
 
-                    <Button disabled={disabled} className="max-w-max">
-                      Chat
-                    </Button>
+                    <SearchDialog bot={bot} disabled={disabled} />
                   </div>
                 </div>
               );

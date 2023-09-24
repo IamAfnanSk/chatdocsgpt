@@ -12,7 +12,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen max-w-4xl mx-auto bg-background flex flex-col w-full">
+        <div className="min-h-screen px-4  max-w-4xl mx-auto bg-background flex flex-col w-full">
           <MainNav />
 
           <main className="flex-1">{children}</main>

@@ -8,6 +8,7 @@ declare global {
       REDIS_CONNECTION_HOST: string;
       REDIS_CONNECTION_PORT: string;
       SUPABASE_SERVICE_ROLE_KEY: string;
+      OPENAI_KEY: string;
     }
   }
 }

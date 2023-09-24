@@ -29,8 +29,6 @@ const DashboardChatBotList: React.FC = async () => {
     .limit(1)
     .maybeSingle();
 
-  console.log(chatbotsData, userCredits);
-
   return (
     <>
       <div className="flex items-center justify-between">

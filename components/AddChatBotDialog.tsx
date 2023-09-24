@@ -21,30 +21,11 @@ const AddChatBotDialog: React.FC = () => {
   const [busy, setBusy] = useState(false);
 
   const handleAddChatbot = async () => {
-    let timeout: NodeJS.Timeout | null = null;
-
     setBusy(true);
 
-    if (
-      !githubRepoURL ||
-      !githubRepoURL.endsWith(".git") ||
-      !githubRepoURL.startsWith("https://github.com/")
-    ) {
-      setBusy(false);
-      return toast.error("Please enter valid github repo url");
-    }
-
-    if (!name) {
-      setBusy(false);
-      return toast.error("Please enter a name for your chatbot");
-    }
-
-    if (description.length > 200) {
-      setBusy(false);
-      return toast.error("Description cannot be more than 200 characters long");
-    }
-
     const abortController = new AbortController();
+
+    let timeout: NodeJS.Timeout | null = null;
 
     const response = await fetch("/api/createChatBot", {
       method: "POST",
@@ -60,22 +41,19 @@ const AddChatBotDialog: React.FC = () => {
 
     const responseData = await response.json();
 
-    console.log(responseData);
-
-    if (responseData.status === "error") {
-      toast.error(responseData.error);
-
+    if (responseData.error) {
       setBusy(false);
+      toast.error(responseData.error);
     }
 
-    if (responseData.status === "success") {
+    if (responseData.data && !responseData.error) {
       setName("");
       setGithubRepoURL("");
       setImageURL("");
       setRepoDocsDirectoryPath("");
       setDescription("");
 
-      toast.success(responseData.data);
+      toast.success(responseData.data.message);
 
       timeout = setTimeout(() => {
         location.reload();
