@@ -1,27 +1,85 @@
+import { Button } from "@/components/ui/button";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { LogoutButton } from "../components/LogoutButton";
-import { LoginButton } from "@/components/LoginButton";
+import Image from "next/image";
 
-export const dynamic = "force-dynamic";
-
-export default async function Index() {
+const Index = async () => {
   const supabase = createServerComponentClient({ cookies });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: chatbotsData } = await supabase
+    .from("training_groups")
+    .select("*, userData:user_id(metadata)");
+
+  console.log(chatbotsData);
 
   return (
-    <div className="w-full flex flex-col items-center">
-      {user ? (
-        <div className="flex items-center gap-4">
-          Hey, {user.email}!
-          <LogoutButton />
-        </div>
-      ) : (
-        <LoginButton />
+    <>
+      <div className="mt-8">
+        <h1 className="text-lg">chatdocsgpt Bots</h1>
+      </div>
+
+      {!!chatbotsData?.length && (
+        <>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-3 mt-8">
+            {chatbotsData.map((bot) => {
+              const disabled = bot.status !== "ready";
+
+              return (
+                <div
+                  key={bot.id}
+                  className={`py-4 px-5 border rounded-md ${
+                    disabled ? "bg-secondary" : ""
+                  }`}
+                >
+                  {disabled && (
+                    <p className="text-xs mb-2 text-destructive">
+                      Bot not ready
+                    </p>
+                  )}
+
+                  <div className="flex flex-col gap-2">
+                    {bot.image_url && (
+                      <div className="h-10 w-10">
+                        <Image
+                          objectFit="contain"
+                          width={200}
+                          height={200}
+                          src={bot.image_url}
+                          alt={"bot image"}
+                        />
+                      </div>
+                    )}
+
+                    <p className="font-medium">{bot.name}</p>
+
+                    <p>{bot.description}</p>
+
+                    <p className="text-xs my-2 font-bold">
+                      by {bot.userData.metadata.full_name}
+                    </p>
+
+                    <Button disabled={disabled} className="max-w-max">
+                      Chat
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
-    </div>
+
+      {!chatbotsData?.length && (
+        <>
+          <p className="mt-8">No chatbots to show</p>
+          <p className="text-sm mt-3">
+            Since all chatbots are currently public they appear here if a user
+            creates them.
+          </p>
+        </>
+      )}
+    </>
   );
-}
+};
+
+export default Index;

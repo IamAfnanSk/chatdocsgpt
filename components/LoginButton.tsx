@@ -5,7 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Mail } from "lucide-react";
 import toast from "react-hot-toast";
 
-export function LoginButton() {
+const LoginButton: React.FC = () => {
   const supabase = createClientComponentClient();
 
   const handleSignIn = async () => {
@@ -26,4 +26,6 @@ export function LoginButton() {
       <Mail className="mr-2 h-4 w-4" /> Login with Google
     </Button>
   );
-}
+};
+
+export { LoginButton };

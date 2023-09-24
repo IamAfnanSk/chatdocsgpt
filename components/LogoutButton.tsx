@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 
-export function LogoutButton() {
+const LogoutButton: React.FC = () => {
   return (
     <form action="/auth/sign-out" method="post">
       <Button>Logout</Button>
     </form>
   );
-}
+};
+
+export { LogoutButton };

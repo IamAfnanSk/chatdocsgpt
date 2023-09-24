@@ -2,9 +2,9 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
+const dynamic = "force-dynamic";
 
-export async function POST(request: Request) {
+const POST = async (request: Request) => {
   const requestUrl = new URL(request.url);
   const supabase = createRouteHandlerClient({ cookies });
 
@@ -13,4 +13,6 @@ export async function POST(request: Request) {
   return NextResponse.redirect(`${requestUrl.origin}`, {
     status: 301,
   });
-}
+};
+
+export { POST, dynamic };
