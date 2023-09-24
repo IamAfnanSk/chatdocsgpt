@@ -19,10 +19,15 @@ import {
   Wand,
   Loader2,
   StopCircleIcon,
+  User2Icon,
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
 import Markdown from "@/components/Markdown";
+import {
+  createClientComponentClient,
+  User,
+} from "@supabase/auth-helpers-nextjs";
 
 const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
   bot,
@@ -41,6 +46,24 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
     e.preventDefault();
     complete(query);
   };
+
+  const [authUser, setAuthUser] = useState<User | null>(null);
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    };
+
+    getUser();
+  }, [supabase, setAuthUser]);
 
   return (
     <>
@@ -62,13 +85,17 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
               {query && (
                 <div className="flex gap-4 items-center">
                   <span className="w-8 h-8">
-                    <Avatar className="w-8 h-8">
-                      <AvatarImage
-                        className="rounded-full"
-                        src={bot.userData.metadata.avatar_url}
-                        alt={bot.userData.metadata.full_name}
-                      />
-                    </Avatar>
+                    {authUser ? (
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage
+                          className="rounded-full"
+                          src={authUser?.user_metadata.avatar_url}
+                          alt={authUser?.user_metadata.full_name}
+                        />
+                      </Avatar>
+                    ) : (
+                      <User2Icon className="w-8 h-8" />
+                    )}
                   </span>
                   <p className="text-sm font-semibold">{query}</p>
                 </div>

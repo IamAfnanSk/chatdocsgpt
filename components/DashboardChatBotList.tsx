@@ -4,6 +4,7 @@ import { AddChatBotDialog } from "@/components/AddChatBotDialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const DashboardChatBotList: React.FC = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -29,6 +30,10 @@ const DashboardChatBotList: React.FC = async () => {
     .limit(1)
     .maybeSingle();
 
+  const handleBuyMoreCredits = () => {
+    toast("Please contact me for credits :)");
+  };
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -42,7 +47,9 @@ const DashboardChatBotList: React.FC = async () => {
         ) : (
           <div className="flex items-center gap-2">
             <p className="text-sm">0 credits left</p>
-            <Button variant="outline">Buy more</Button>
+            <Button onClick={handleBuyMoreCredits} variant="outline">
+              Buy more
+            </Button>
           </div>
         )}
       </div>
