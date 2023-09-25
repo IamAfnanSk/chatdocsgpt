@@ -52,6 +52,10 @@ const POST = async (request: NextRequest) => {
       throw new UserError("Missing query in request data");
     }
 
+    if (query.length > 250) {
+      throw new UserError("Query is too big");
+    }
+
     const supabaseClient = createClient(supabaseUrl, supabaseServiceKey);
 
     // Moderate the content to comply with OpenAI T&C
