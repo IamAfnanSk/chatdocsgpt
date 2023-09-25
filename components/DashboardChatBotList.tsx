@@ -63,7 +63,13 @@ const DashboardChatBotList: React.FC = async () => {
               <div key={bot.id} className="py-2 px-5 border rounded-md">
                 <div className="flex items-center justify-between">
                   <p>{bot.name}</p>
-                  <Badge variant="secondary">Status: {bot.status}</Badge>
+                  <p>{bot.description}</p>
+                  <span className="text-xs">
+                    Status:
+                    <Badge className="ml-2" variant="secondary">
+                      {bot.status}
+                    </Badge>
+                  </span>
                 </div>
               </div>
             );

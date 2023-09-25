@@ -32,14 +32,16 @@ const Index = async () => {
                     disabled ? "bg-secondary" : ""
                   }`}
                 >
-                  {disabled && (
-                    <span className="text-xs mb-2">
-                      Bot not ready: status -{" "}
-                      <Badge variant={"outline"}>{bot.status}</Badge>
-                    </span>
-                  )}
+                  <div className="flex flex-col gap-2 h-full">
+                    {disabled && (
+                      <span className="text-xs mb-2">
+                        Bot not ready:
+                        <Badge className="ml-2" variant={"outline"}>
+                          training
+                        </Badge>
+                      </span>
+                    )}
 
-                  <div className="flex flex-col gap-2">
                     {bot.image_url && (
                       <div className="h-10 w-10">
                         <Image
@@ -54,7 +56,7 @@ const Index = async () => {
 
                     <p className="font-medium">{bot.name}</p>
 
-                    <p>{bot.description}</p>
+                    <p className="flex-1">{bot.description}</p>
 
                     <p className="text-xs my-2 font-bold">
                       by {bot.userData.metadata.full_name}
