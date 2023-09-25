@@ -20,6 +20,7 @@ import {
   Loader2,
   StopCircleIcon,
   User2Icon,
+  FlaskConicalIcon,
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
@@ -28,6 +29,7 @@ import {
   createClientComponentClient,
   User,
 } from "@supabase/auth-helpers-nextjs";
+import { Badge } from "./ui/badge";
 
 const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
   bot,
@@ -75,7 +77,16 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
         </DialogTrigger>
         <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>chatdocgpt powered bot: {bot.name}</DialogTitle>
+            <DialogTitle>
+              <span className="flex items-center gap-2">
+                <span>chatdocgpt powered bot: {bot.name} </span>
+
+                <Badge variant={"secondary"}>
+                  <FlaskConicalIcon className="h-3 w-3 mr-1" />
+                  <span className="text-xs">experimental</span>
+                </Badge>
+              </span>
+            </DialogTitle>
             <DialogDescription>{bot.description}</DialogDescription>
             <hr />
           </DialogHeader>
