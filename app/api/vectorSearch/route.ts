@@ -148,7 +148,7 @@ const POST = async (request: NextRequest) => {
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [chatMessage],
-      max_tokens: 512,
+      max_tokens: 1024,
       temperature: 0,
       stream: true,
     });
