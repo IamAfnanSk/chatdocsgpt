@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 
+const dynamic = "force-dynamic";
+
 const DashboardChatBotList: React.FC = async () => {
   const supabase = createServerComponentClient({ cookies });
 
@@ -73,3 +75,5 @@ const DashboardChatBotList: React.FC = async () => {
 };
 
 export { DashboardChatBotList };
+
+export { dynamic };

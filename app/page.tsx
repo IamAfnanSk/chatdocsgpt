@@ -1,9 +1,10 @@
 import { SearchDialog } from "@/components/SearchDialog";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Image from "next/image";
+
+const dynamic = "force-dynamic";
 
 const Index = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -82,3 +83,5 @@ const Index = async () => {
 };
 
 export default Index;
+
+export { dynamic };
