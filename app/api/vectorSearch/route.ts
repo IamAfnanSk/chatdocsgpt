@@ -46,7 +46,7 @@ const POST = async (request: NextRequest) => {
       throw new UserError("Missing request data");
     }
 
-    const { prompt: query, trainingGroupId } = requestData;
+    const { prompt: query, botId: trainingGroupId } = requestData;
 
     if (!query) {
       throw new UserError("Missing query in request data");

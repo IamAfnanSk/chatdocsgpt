@@ -36,9 +36,9 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
   const [query, setQuery] = useState<string>("");
 
   const { complete, completion, isLoading, error, stop } = useCompletion({
-    api: `/api/vectorSearch?trainingGroupId=${bot.id}`,
+    api: "/api/vectorSearch",
     body: {
-      trainingGroupId: bot.id,
+      botId: bot.id,
     },
   });
 
