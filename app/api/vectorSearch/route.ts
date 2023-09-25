@@ -178,6 +178,8 @@ export const POST = async (request: NextRequest) => {
           temperature: 0,
           stream: true,
           contextText,
+          query,
+          tokenCount,
         },
       },
     });
