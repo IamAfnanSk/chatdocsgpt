@@ -22,7 +22,7 @@ const config = new Configuration({
 
 const openai = new OpenAIApi(config);
 
-const runtime = "edge";
+export const runtime = "edge";
 
 const POST = async (request: NextRequest) => {
   try {
@@ -223,4 +223,4 @@ const POST = async (request: NextRequest) => {
   }
 };
 
-export { POST, runtime };
+export { POST };
