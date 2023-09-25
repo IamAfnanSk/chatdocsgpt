@@ -71,7 +71,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button disabled={disabled} className="max-w-max">
+          <Button disabled={disabled} size={"sm"} className="max-w-max">
             Chat
           </Button>
         </DialogTrigger>

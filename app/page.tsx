@@ -54,11 +54,11 @@ const Index = async () => {
                       </div>
                     )}
 
-                    <p className="font-medium">{bot.name}</p>
+                    <p className="font-bold">{bot.name}</p>
 
                     <p className="flex-1">{bot.description}</p>
 
-                    <p className="text-xs my-2 font-bold">
+                    <p className="text-xs my-1 font-bold">
                       by {bot.userData.metadata.full_name}
                     </p>
 

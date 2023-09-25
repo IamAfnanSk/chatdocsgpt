@@ -2,7 +2,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { MainNav } from "@/components/MainNav";
 import Link from "next/link";
-import { HeartIcon, RocketIcon } from "lucide-react";
+import { HeartIcon, RocketIcon, TwitterIcon } from "lucide-react";
 
 const metadata = {
   title: "chatdocsgpt",
@@ -20,10 +20,12 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 
           <Toaster />
 
-          <footer className="py-10 flex items-center justify-between flex-wrap gap-2">
-            <span className="flex items-center ">
-              Made with <HeartIcon className="text-destructive w-4 h-4 mx-2" />{" "}
-              by
+          <footer className="py-10 flex items-center text-sm justify-between flex-wrap gap-2">
+            <div className="flex items-center ">
+              <span className="flex items-center">
+                Made with{" "}
+                <HeartIcon className="text-destructive w-4 h-4 mx-1" /> by
+              </span>
               <Link
                 href={"https://afnan.dev?utm_source=chatdocsgpt"}
                 target="_blank"
@@ -31,11 +33,21 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
               >
                 Afnan Shaikh
               </Link>
-            </span>
+
+              <span className="mx-3 h-4 w-[1px] bg-primary"></span>
+
+              <Link
+                href={"https://peerlist.io/iamafnansk"}
+                target="_blank"
+                className="border-b border-dashed border-primary text-xs"
+              >
+                Peerlist profile
+              </Link>
+            </div>
 
             <span className="flex items-center">
               <RocketIcon className="w-4 h-4 mr-2" />
-              Powered by Supabse, Nextjs and chatdocsgpt
+              Powered by Supabse, OpenAI, Nextjs, shadcn/ui and chatdocsgpt
             </span>
           </footer>
         </div>
