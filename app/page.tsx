@@ -11,7 +11,8 @@ const Index = async () => {
 
   const { data: chatbotsData } = await supabase
     .from("training_groups")
-    .select("*, userData:user_id(metadata)");
+    .select("*, userData:user_id(metadata)")
+    .eq("is_disabled", false);
 
   return (
     <>

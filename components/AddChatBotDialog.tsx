@@ -98,7 +98,7 @@ const AddChatBotDialog: React.FC = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Vue.js GPT"
+              placeholder="React GPT"
               className="col-span-3"
             />
           </div>
@@ -129,7 +129,7 @@ const AddChatBotDialog: React.FC = () => {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="A powerfull vue.js docschatgpt bot"
+              placeholder="A powerfull docschatgpt bot trained on React docs"
               className="col-span-3"
             />
           </div>
