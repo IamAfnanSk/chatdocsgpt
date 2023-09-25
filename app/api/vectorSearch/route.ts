@@ -80,6 +80,16 @@ const POST = async (request: NextRequest) => {
       input: sanitizedQuery.replaceAll("\n", " "),
     });
 
+    await supabaseClient.from("query_dump").insert({
+      query_data: {
+        type: "embedding-create",
+        data: {
+          model: "text-embedding-ada-002",
+          input: sanitizedQuery.replaceAll("\n", " "),
+        },
+      },
+    });
+
     if (embeddingResponse.status !== 200) {
       throw new ApplicationError(
         "Failed to create embedding for question",
@@ -155,6 +165,20 @@ const POST = async (request: NextRequest) => {
       max_tokens: 512,
       temperature: 0,
       stream: true,
+    });
+
+    await supabaseClient.from("query_dump").insert({
+      query_data: {
+        type: "create-completion",
+        data: {
+          model: "gpt-3.5-turbo",
+          messages: [chatMessage],
+          max_tokens: 512,
+          temperature: 0,
+          stream: true,
+          contextText,
+        },
+      },
     });
 
     if (!response.ok) {
