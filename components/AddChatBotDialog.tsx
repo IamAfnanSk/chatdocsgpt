@@ -47,12 +47,6 @@ const AddChatBotDialog: React.FC = () => {
     }
 
     if (responseData.data && !responseData.error) {
-      setName("");
-      setGithubRepoURL("");
-      setImageURL("");
-      setRepoDocsDirectoryPath("");
-      setDescription("");
-
       toast.success(responseData.data.message);
 
       timeout = setTimeout(() => {
@@ -72,13 +66,14 @@ const AddChatBotDialog: React.FC = () => {
   const [githubRepoURL, setGithubRepoURL] = useState("");
   const [repoDocsDirectoryPath, setRepoDocsDirectoryPath] = useState("");
   const [description, setDescription] = useState("");
+  const [tryQuestion, setTryQuestion] = useState("");
 
   return (
     <Dialog>
       <DialogTrigger disabled={busy} asChild>
         <Button variant="outline">Create new chatbot</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>New chatbot details</DialogTitle>
           <DialogDescription>
@@ -106,34 +101,7 @@ const AddChatBotDialog: React.FC = () => {
               className="col-span-3"
             />
           </div>
-          <div className="flex flex-col gap-2 items-start">
-            <Label htmlFor="description" className="text-right">
-              Description
-            </Label>
-            <Textarea
-              disabled={busy}
-              required
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="A powerfull vue.js docschatgpt bot"
-              className="col-span-3"
-            />
-          </div>
-          <div className="flex flex-col gap-2 items-start">
-            <Label htmlFor="imageURL" className="text-right">
-              Image url
-            </Label>
-            <Input
-              disabled={busy}
-              type="text"
-              id="imageURL"
-              value={imageURL}
-              onChange={(e) => setImageURL(e.target.value)}
-              placeholder="https://www.afnan.dev/_vercel/image?url=/images/logo-dark.svg&w=1536&q=100"
-              className="col-span-3"
-            />
-          </div>
+
           <div className="flex flex-col gap-2 items-start">
             <Label htmlFor="githubRepoURL" className="text-right">
               GitHub repo url <span className="text-destructive">*</span>
@@ -149,6 +117,37 @@ const AddChatBotDialog: React.FC = () => {
               className="col-span-3"
             />
           </div>
+
+          <div className="flex flex-col gap-2 items-start">
+            <Label htmlFor="description" className="text-right">
+              Description
+            </Label>
+            <Textarea
+              disabled={busy}
+              required
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="A powerfull vue.js docschatgpt bot"
+              className="col-span-3"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2 items-start">
+            <Label htmlFor="imageURL" className="text-right">
+              Image url
+            </Label>
+            <Input
+              disabled={busy}
+              type="text"
+              id="imageURL"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+              placeholder="https://www.afnan.dev/_vercel/image?url=/images/logo-dark.svg&w=1536&q=100"
+              className="col-span-3"
+            />
+          </div>
+
           <div className="flex flex-col gap-2 items-start">
             <Label htmlFor="repoDocsDirectoryPath" className="text-right">
               Repo docs directory path
@@ -160,6 +159,21 @@ const AddChatBotDialog: React.FC = () => {
               value={repoDocsDirectoryPath}
               onChange={(e) => setRepoDocsDirectoryPath(e.target.value)}
               placeholder="/pages/docs"
+              className="col-span-3"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2 items-start">
+            <Label htmlFor="tryQuestion" className="text-right">
+              Trial question
+            </Label>
+            <Input
+              disabled={busy}
+              type="text"
+              id="tryQuestion"
+              value={tryQuestion}
+              onChange={(e) => setTryQuestion(e.target.value)}
+              placeholder="What are react hook?"
               className="col-span-3"
             />
           </div>

@@ -29,6 +29,7 @@ const POST = async (request: NextRequest) => {
       githubRepoURL,
       repoDocsDirectoryPath,
       description,
+      tryQuestion,
     } = await request.json();
 
     if (
@@ -80,6 +81,7 @@ const POST = async (request: NextRequest) => {
           git_source_doc_dir_path: repoDocsDirectoryPath || null,
           image_url: imageURL,
           description,
+          try_question: tryQuestion,
         })
         .select("id")
         .maybeSingle();

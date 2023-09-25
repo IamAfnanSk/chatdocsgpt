@@ -160,26 +160,29 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                   }`}
                 />
               </div>
-              <div className="text-xs">
-                Or try:{" "}
-                <button
-                  type="button"
-                  className="px-1.5 py-0.5
+
+              {bot.try_question && (
+                <div className="text-xs">
+                  Or try:{" "}
+                  <button
+                    type="button"
+                    className="px-1.5 py-0.5
                   text-xs
                   bg-slate-50 
                   hover:bg-slate-100 
                   rounded border border-slate-200 
                   transition-colors"
-                  onClick={(_) => setQuery("What is supabase storage?")}
-                >
-                  What is supabase storage?
-                </button>
-              </div>
+                    onClick={(_) => setQuery(bot.try_question)}
+                  >
+                    {bot.try_question}
+                  </button>
+                </div>
+              )}
             </div>
 
             <DialogFooter>
               <Button
-                className="mt-2 sm:mt-0"
+                className={`mt-2 ${bot.try_question ? "sm:mt-0" : ""}`}
                 disabled={isLoading}
                 type="submit"
               >
