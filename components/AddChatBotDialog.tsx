@@ -36,6 +36,7 @@ const AddChatBotDialog: React.FC = () => {
         githubRepoURL,
         repoDocsDirectoryPath,
         description,
+        tryQuestion,
       }),
     });
 
