@@ -6,12 +6,12 @@ import { createClient } from "@supabase/supabase-js";
 
 import { ApplicationError, UserError } from "@/lib/errors";
 
-const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const POST = async (request: NextRequest) => {
+export const POST = async (request: NextRequest) => {
   try {
     if (!supabaseUrl) {
       throw new ApplicationError("Missing environment variable SUPABASE_URL");
@@ -130,5 +130,3 @@ const POST = async (request: NextRequest) => {
     );
   }
 };
-
-export { POST, dynamic };

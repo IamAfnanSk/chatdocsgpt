@@ -2,9 +2,9 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
-const GET = async (request: Request) => {
+export const GET = async (request: Request) => {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
 
@@ -15,5 +15,3 @@ const GET = async (request: Request) => {
 
   return NextResponse.redirect(requestUrl.origin);
 };
-
-export { GET, dynamic };

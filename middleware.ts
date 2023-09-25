@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 import type { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
+export const middleware = async (req: NextRequest) => {
   const res = NextResponse.next();
 
   const supabase = createMiddlewareClient({ req, res });
@@ -11,4 +11,4 @@ export async function middleware(req: NextRequest) {
   await supabase.auth.getSession();
 
   return res;
-}
+};

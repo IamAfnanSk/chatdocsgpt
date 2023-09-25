@@ -4,7 +4,7 @@ import { MainNav } from "@/components/MainNav";
 import Link from "next/link";
 import { HeartIcon, RocketIcon, TwitterIcon } from "lucide-react";
 
-const metadata = {
+export const metadata = {
   title: "chatdocsgpt",
   description: "Generate chat bots trained on docs provided by you",
 };
@@ -58,4 +58,3 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
 };
 
 export default RootLayout;
-export { metadata };

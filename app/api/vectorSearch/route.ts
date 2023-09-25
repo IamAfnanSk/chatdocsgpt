@@ -23,8 +23,9 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 
 export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
-const POST = async (request: NextRequest) => {
+export const POST = async (request: NextRequest) => {
   try {
     if (!openAiKey) {
       throw new ApplicationError("Missing environment variable OPENAI_KEY");
@@ -222,5 +223,3 @@ const POST = async (request: NextRequest) => {
     );
   }
 };
-
-export { POST };

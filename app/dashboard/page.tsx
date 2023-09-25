@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 import { DashboardChatBotList } from "@/components/DashboardChatBotList";
 
-const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 const Dashboard: React.FC = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -25,5 +25,3 @@ const Dashboard: React.FC = async () => {
 };
 
 export default Dashboard;
-
-export { dynamic };

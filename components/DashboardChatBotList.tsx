@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 import Link from "next/link";
 
-const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 const DashboardChatBotList: React.FC = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -89,5 +89,3 @@ const DashboardChatBotList: React.FC = async () => {
 };
 
 export { DashboardChatBotList };
-
-export { dynamic };
