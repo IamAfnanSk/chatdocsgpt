@@ -64,7 +64,7 @@ const Markdown: React.FC<{ markdown: string }> = ({ markdown }) => {
           style={syntaxTheme}
           language={hasLang[1]}
           PreTag="div"
-          className="codeStyle"
+          className="codeStyle min-w-0"
           showLineNumbers={true}
           wrapLines={hasMeta}
           useInlineStyles={true}
@@ -79,7 +79,12 @@ const Markdown: React.FC<{ markdown: string }> = ({ markdown }) => {
   };
 
   return (
-    <ReactMarkdown components={MarkdownComponents}>{markdown}</ReactMarkdown>
+    <ReactMarkdown
+      className="min-w-0 overflow-auto max-w-full"
+      components={MarkdownComponents}
+    >
+      {markdown}
+    </ReactMarkdown>
   );
 };
 

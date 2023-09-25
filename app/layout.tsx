@@ -24,7 +24,8 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
             <div className="flex items-center ">
               <span className="flex items-center">
                 Made with{" "}
-                <HeartIcon className="text-destructive w-4 h-4 mx-1" /> by
+                <HeartIcon className="text-destructive shrink-0 w-4 h-4 mx-1" />{" "}
+                by
               </span>
               <Link
                 href={"https://afnan.dev?utm_source=chatdocsgpt"}
@@ -46,7 +47,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
             </div>
 
             <span className="flex items-center">
-              <RocketIcon className="w-4 h-4 mr-2" />
+              <RocketIcon className="w-4 h-4 mr-2 shrink-0" />
               Powered by Supabse, OpenAI, Nextjs, shadcn/ui and chatdocsgpt
             </span>
           </footer>

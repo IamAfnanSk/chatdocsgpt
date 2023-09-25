@@ -65,7 +65,7 @@ const DashboardChatBotList: React.FC = async () => {
       </div>
 
       {chatbotsData && (
-        <div className="grid grid-flow-col gap-5 mt-10">
+        <div className="flex flex-col gap-5 mt-10">
           {chatbotsData.map((bot) => {
             return (
               <div key={bot.id} className="py-2 px-5 border rounded-md">

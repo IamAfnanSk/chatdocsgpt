@@ -71,14 +71,14 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button disabled={disabled} size={"sm"} className="max-w-max">
+          <Button disabled={disabled} size={"sm"} className="max-w-max min-w-0">
             Chat
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto min-w-0">
           <DialogHeader>
             <DialogTitle>
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 flex-wrap">
                 <span>chatdocgpt powered bot: {bot.name} </span>
 
                 <Badge variant={"secondary"}>
@@ -87,15 +87,18 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                 </Badge>
               </span>
             </DialogTitle>
-            <DialogDescription>{bot.description}</DialogDescription>
+
+            <DialogDescription className="text-left ">
+              {bot.description}
+            </DialogDescription>
             <hr />
           </DialogHeader>
 
-          <form onSubmit={handleSubmit}>
-            <div className="grid gap-4 text-primary">
+          <form onSubmit={handleSubmit} className="min-w-0">
+            <div className="flex flex-col gap-4 text-primary min-w-0">
               {query && (
-                <div className="flex gap-4 items-center">
-                  <span className="w-8 h-8">
+                <div className="flex gap-4 items-center min-w-0">
+                  <div className="w-8 h-8 shrink-0 block">
                     {authUser ? (
                       <Avatar className="w-8 h-8">
                         <AvatarImage
@@ -107,7 +110,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                     ) : (
                       <User2Icon className="w-8 h-8" />
                     )}
-                  </span>
+                  </div>
                   <p className="text-sm font-semibold">{query}</p>
                 </div>
               )}
@@ -125,8 +128,8 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
               )}
 
               {(isLoading || completion) && !error ? (
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-2 justify-between">
+                <div className="flex flex-col gap-4 min-0 max-w-full">
+                  <div className="flex items-center gap-2 justify-between min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="bg-gray-50 w-8 h-8 rounded-full text-center flex items-center justify-center">
                         <Wand width={18} />
@@ -157,7 +160,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                 </div>
               ) : null}
 
-              <div className="relative">
+              <div className="relative min-w-0">
                 <Input
                   placeholder="Ask a question..."
                   name="search"
@@ -166,14 +169,14 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                   className="col-span-3"
                 />
                 <CornerDownLeft
-                  className={`absolute top-3 right-5 h-4 w-4 text-primary transition-opacity ${
+                  className={`absolute bg-background top-3 right-5 h-4 w-4 text-primary transition-opacity ${
                     query ? "opacity-100" : "opacity-0"
                   }`}
                 />
               </div>
 
               {bot.try_question && (
-                <div className="text-xs">
+                <div className="text-xs min-w-0">
                   Or try:{" "}
                   <button
                     type="button"
@@ -193,7 +196,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
 
             <DialogFooter>
               <Button
-                className={`mt-2 ${bot.try_question ? "sm:mt-0" : ""}`}
+                className={`mt-2 min-w-0 ${bot.try_question ? "sm:mt-0" : ""}`}
                 disabled={isLoading}
                 type="submit"
               >
