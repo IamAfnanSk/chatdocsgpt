@@ -4,7 +4,8 @@ import { AddChatBotDialog } from "@/components/AddChatBotDialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
+
+import Link from "next/link";
 
 const dynamic = "force-dynamic";
 
@@ -32,10 +33,6 @@ const DashboardChatBotList: React.FC = async () => {
     .limit(1)
     .maybeSingle();
 
-  const handleBuyMoreCredits = () => {
-    toast("Please contact me for credits :)");
-  };
-
   return (
     <>
       <div className="flex items-center justify-between">
@@ -48,22 +45,33 @@ const DashboardChatBotList: React.FC = async () => {
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <p className="text-sm">0 credits left</p>
-            <Button onClick={handleBuyMoreCredits} variant="outline">
-              Buy more
-            </Button>
+            <p className="text-sm">
+              0 credits left: <br />
+              <span className="text-xs">
+                Please{" "}
+                <Link
+                  className="border-b"
+                  href={"https://twitter.com/IamAfnanSK"}
+                  target="_blank"
+                >
+                  contact me
+                </Link>{" "}
+                for credits :)
+              </span>
+            </p>
+            {/* <Button variant="outline">Buy more</Button> */}
           </div>
         )}
       </div>
 
       {chatbotsData && (
-        <div className="flex flex-col gap-3 mt-5">
+        <div className="grid grid-flow-col gap-5 mt-10">
           {chatbotsData.map((bot) => {
             return (
               <div key={bot.id} className="py-2 px-5 border rounded-md">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-2 justify-between">
                   <p>{bot.name}</p>
-                  <p>{bot.description}</p>
+                  <p className="text-sm">{bot.description}</p>
                   <span className="text-xs">
                     Status:
                     <Badge className="ml-2" variant="secondary">
