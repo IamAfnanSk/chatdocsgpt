@@ -1,12 +1,4 @@
-import {
-  ArrowUp,
-  Book,
-  BookMarkedIcon,
-  Bot,
-  Lock,
-  MessagesSquare,
-  Server,
-} from "lucide-react";
+import { BookMarkedIcon, Bot, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 
 const features = [
