@@ -4,8 +4,7 @@ import { cookies } from "next/headers";
 
 import { createClient } from "@supabase/supabase-js";
 
-// 2 minutes
-export const revalidate = 2 * 60;
+export const dynamic = "force-dynamic";
 
 const DumpingGround: React.FC = async () => {
   const supabase = createServerComponentClient({ cookies });
