@@ -54,7 +54,7 @@ const DumpingGround: React.FC = async () => {
               key={idx}
               className="px-4 py-2 rounded-md bg-secondary overflow-x-auto"
             >
-              {new Date(queryData.created_at).toLocaleString()}
+              {new Date(queryData.created_at).toLocaleString("en-IN")}
               <pre>{JSON.stringify(queryData.query_data, null, 2)}</pre>
             </div>
           );
