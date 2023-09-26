@@ -193,7 +193,31 @@ the documentation, say, "Sorry, I don't know how to help with that."
     }
 
     // Transform the response into a readable stream
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response, {
+      onCompletion: async (completion) => {
+        const encoded = tokenizer.encode(completion);
+        const completionTokenCount = encoded.text.length;
+
+        await supabaseClient.from("query_dump").insert({
+          query_data: {
+            type: "on-completion",
+            data: {
+              model: "gpt-3.5-turbo",
+              messages: [chatMessage],
+              max_tokens: 512,
+              temperature: 0,
+              stream: true,
+              contextText,
+              query,
+              queryTokenCount: tokenCount,
+              completion,
+              completionTokenCount,
+              totalTokenCount: tokenCount + completionTokenCount,
+            },
+          },
+        });
+      },
+    });
 
     // Return a StreamingTextResponse, which can be consumed by the client
     return new StreamingTextResponse(stream);
