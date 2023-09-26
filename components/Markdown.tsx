@@ -13,6 +13,8 @@ import yaml from "react-syntax-highlighter/dist/esm/languages/prism/yaml";
 import rangeParser from "parse-numeric-range";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+import remarkGfm from "remark-gfm";
+
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
 SyntaxHighlighter.registerLanguage("scss", scss);
@@ -80,8 +82,9 @@ const Markdown: React.FC<{ markdown: string }> = ({ markdown }) => {
 
   return (
     <ReactMarkdown
-      className="min-w-0 overflow-auto max-w-full"
+      className="min-w-0 overflow-auto max-w-full react-markdown"
       components={MarkdownComponents}
+      remarkPlugins={[remarkGfm]}
     >
       {markdown}
     </ReactMarkdown>
