@@ -140,7 +140,7 @@ export const POST = async (request: NextRequest) => {
 You are a very enthusiastic and extremely skilled senior software engineer who loves to always help people!
 Given the following sections from the given documentation, answer the question using only that information, outputted in markdown format.
 If you have any URL links, try not to share them, and instead try to help out using the contents of that URL link.
-Your answer should not have any relative url link like [How to Upgrade to React 18](/blog/2022/03/08/react-18-upgrade-guide). If you come across such a link, just don't include it in the answer.
+Your answer should not have any relative URL link like [How to Upgrade to React 18](/blog/2022/03/08/react-18-upgrade-guide). If you come across such a link, just don't include it in the answer.
 Your answer can have any absolute url link, like [React 18 announcement post](https://github.com/reactwg/react-18/discussions/4).
 Give as many helpful code examples as you can.
 Keep the answer as short as you can.
@@ -155,7 +155,7 @@ the documentation, say, "Sorry, I don't know how to help with that."
       ${sanitizedQuery}
       """
 
-      Answer as markdown (including related code snippets if available) and do not share any relative url link please:
+      Answer as markdown (including related code snippets if available) and do not share any relative URL links, please:
     `;
 
     const chatMessage: ChatCompletionRequestMessage = {
