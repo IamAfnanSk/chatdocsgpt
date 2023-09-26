@@ -23,10 +23,13 @@ const config = new Configuration({
 
 const openai = new OpenAIApi(config);
 
+// when changing this change costPer1kTokenInputInUSD and costPer1kTokenOutputInUSD variable too
 const model = "gpt-3.5-turbo-0613";
 const maxCompletionTokens = 512;
 const temperature = 0;
 const stream = true;
+const costPer1kTokenInputInUSD = 0.0015;
+const costPer1kTokenOutputInUSD = 0.002;
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
@@ -228,11 +231,19 @@ export const POST = async (request: NextRequest) => {
         let inputTokenCount = 0;
 
         for (const message of messages) {
-          const encodedMessage = tokenizer.encode((message as any).content);
-          inputTokenCount += encodedMessage.text.length;
+          const encodedInput = tokenizer.encode((message as any).content);
+          inputTokenCount += encodedInput.text.length;
         }
 
         const totalTokenCount = inputTokenCount + outputTokenCount;
+
+        const inputCostInUSD =
+          (inputTokenCount / 1000) * costPer1kTokenInputInUSD;
+
+        const outputCostInUSD =
+          (outputTokenCount / 1000) * costPer1kTokenOutputInUSD;
+
+        const totalCostInUSD = inputCostInUSD + outputCostInUSD;
 
         // Query dump to db
         await supabaseClient.from("query_dump").insert({
@@ -249,6 +260,9 @@ export const POST = async (request: NextRequest) => {
               inputTokenCount,
               outputTokenCount,
               totalTokenCount,
+              inputCostInUSD,
+              outputCostInUSD,
+              totalCostInUSD,
             },
           },
         });
