@@ -103,7 +103,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                 <span className="p-0.5 rounded-sm bg-slate-100">
                   gpt-3.5-turbo
                 </span>{" "}
-                model.{" "}
+                model to cut cost.{" "}
                 <span className="p-0.5 rounded-sm bg-slate-100">gpt-4</span>
                 can generate even better answers!
               </p>
