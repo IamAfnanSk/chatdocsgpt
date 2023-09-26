@@ -221,14 +221,14 @@ export const POST = async (request: NextRequest) => {
 
     // Transform the response into a readable stream
     const openAIStream = OpenAIStream(response, {
-      onFinal: async (completion) => {
+      onCompletion: async (completion) => {
         const encodedOutput = tokenizer.encode(completion);
         const outputTokenCount = encodedOutput.text.length;
 
         let inputTokenCount = 0;
 
-        for (const message in messages) {
-          const encodedMessage = tokenizer.encode(message);
+        for (const message of messages) {
+          const encodedMessage = tokenizer.encode((message as any).content);
           inputTokenCount += encodedMessage.text.length;
         }
 
