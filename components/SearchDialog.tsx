@@ -85,17 +85,29 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
               <span className="flex items-center gap-2 flex-wrap">
                 <span>chatdocgpt powered bot: {bot.name} </span>
 
-                <Badge variant={"secondary"}>
+                <Badge variant={"default"}>
                   <FlaskConicalIcon className="h-3 w-3 mr-1" />
                   <span className="text-xs">experimental</span>
                 </Badge>
               </span>
             </DialogTitle>
 
-            <DialogDescription className="text-left ">
+            <DialogDescription className="text-left text-primary">
               {bot.description}
             </DialogDescription>
             <hr />
+            <DialogDescription className="text-left">
+              <p className={`text-xs mt-2`}>
+                <span className="text-primary font-bold">Note:</span> We are
+                currently using{" "}
+                <span className="p-0.5 rounded-sm bg-slate-100">
+                  gpt-3.5-turbo
+                </span>{" "}
+                model.{" "}
+                <span className="p-0.5 rounded-sm bg-slate-100">gpt-4</span>
+                can generate even better answers!
+              </p>
+            </DialogDescription>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="min-w-0">
