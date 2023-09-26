@@ -23,13 +23,10 @@ const AddChatBotDialog: React.FC = () => {
   const handleAddChatbot = async () => {
     setBusy(true);
 
-    const abortController = new AbortController();
-
     let timeout: NodeJS.Timeout | null = null;
 
-    const response = await fetch("/api/createChatBot", {
+    const response = await fetch("/api/create-chat-bot", {
       method: "POST",
-      signal: abortController.signal,
       body: JSON.stringify({
         name,
         imageURL,
@@ -55,11 +52,6 @@ const AddChatBotDialog: React.FC = () => {
         setBusy(false);
       }, 3000);
     }
-
-    return () => {
-      abortController.abort();
-      if (timeout) clearTimeout(timeout);
-    };
   };
 
   const [name, setName] = useState("");

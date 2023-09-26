@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { MainNav } from "@/components/MainNav";
 import Link from "next/link";
 import { HeartIcon, RocketIcon, TwitterIcon } from "lucide-react";
+import Script from "next/script";
 
 export const metadata = {
   title: "chatdocsgpt",
@@ -13,6 +14,17 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
       <body>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-3VXXLKPPLS" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-3VXXLKPPLS');
+          `}
+        </Script>
+
         <div className="min-h-screen px-4  max-w-4xl mx-auto bg-background flex flex-col w-full">
           <MainNav />
 
