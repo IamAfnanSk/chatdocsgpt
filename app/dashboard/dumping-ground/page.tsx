@@ -36,10 +36,10 @@ const DumpingGround: React.FC = async () => {
   const { data: queryDumpData } = await supabaseAdmin
     .from("query_dump")
     .select("*")
-    .limit(30)
     .order("id", {
       ascending: false,
-    });
+    })
+    .limit(30);
 
   if (!queryDumpData) {
     return "no data to show";
