@@ -46,6 +46,10 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    (window as any).gtag?.("event", "asked-query", {
+      query,
+      userId: authUser?.id,
+    });
     complete(query);
   };
 

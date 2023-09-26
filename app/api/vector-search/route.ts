@@ -87,6 +87,7 @@ export const POST = async (request: NextRequest) => {
         data: {
           model: "text-embedding-ada-002",
           input: sanitizedQuery.replaceAll("\n", " "),
+          botId: trainingGroupId,
         },
       },
     });
@@ -183,6 +184,7 @@ the documentation, say, "Sorry, I don't know how to help with that."
           contextText,
           query,
           tokenCount,
+          botId: trainingGroupId,
         },
       },
     });
@@ -213,6 +215,7 @@ the documentation, say, "Sorry, I don't know how to help with that."
               completion,
               completionTokenCount,
               totalTokenCount: tokenCount + completionTokenCount,
+              botId: trainingGroupId,
             },
           },
         });
