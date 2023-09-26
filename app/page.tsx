@@ -1,3 +1,4 @@
+import { Features } from "@/components/Features";
 import { SearchDialog } from "@/components/SearchDialog";
 import { Badge } from "@/components/ui/badge";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -17,8 +18,18 @@ const Index = async () => {
   return (
     <>
       <div className="mt-8">
-        <h1 className="text-lg">chatdocsgpt Bots</h1>
+        <h1 className="text-xl font-bold">chatdocsgpt chat Bots</h1>
       </div>
+
+      {!chatbotsData?.length && (
+        <>
+          <p className="mt-8 text-lg font-medium">No chat bots to show</p>
+          <p className="text-sm mt-3">
+            Since all chat bots are currently public they appear here if a user
+            creates them.
+          </p>
+        </>
+      )}
 
       {!!chatbotsData?.length && (
         <>
@@ -36,7 +47,7 @@ const Index = async () => {
                   <div className="flex flex-col gap-2 h-full">
                     {disabled && (
                       <span className="text-xs mb-2">
-                        Bot not ready:
+                        Chat bot not ready:
                         <Badge className="ml-2" variant={"outline"}>
                           training
                         </Badge>
@@ -49,7 +60,7 @@ const Index = async () => {
                           width={200}
                           height={200}
                           src={bot.image_url}
-                          alt={"bot image"}
+                          alt={"chat bot image"}
                           className="object-contain"
                         />
                       </div>
@@ -72,15 +83,7 @@ const Index = async () => {
         </>
       )}
 
-      {!chatbotsData?.length && (
-        <>
-          <p className="mt-8">No chatbots to show</p>
-          <p className="text-sm mt-3">
-            Since all chatbots are currently public they appear here if a user
-            creates them.
-          </p>
-        </>
-      )}
+      <Features />
     </>
   );
 };

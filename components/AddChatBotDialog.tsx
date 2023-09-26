@@ -64,13 +64,13 @@ const AddChatBotDialog: React.FC = () => {
   return (
     <Dialog>
       <DialogTrigger disabled={busy} asChild>
-        <Button variant="outline">Create new chatbot</Button>
+        <Button variant="outline">Create new chat bot</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>New chatbot details</DialogTitle>
+          <DialogTitle>New chat bot details</DialogTitle>
           <DialogDescription>
-            Add details for your new chatbot, click create once done
+            Add details for your new chat bot, click create once done
           </DialogDescription>
           <DialogDescription>
             <span className="text-destructive">NOTE:</span> chatdocsgpt
@@ -121,7 +121,7 @@ const AddChatBotDialog: React.FC = () => {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="A powerfull docschatgpt bot trained on React docs"
+              placeholder="A powerfull docschatgpt chat bot trained on React docs"
               className="col-span-3"
             />
           </div>

@@ -67,7 +67,7 @@ export const POST = async (request: NextRequest) => {
 
     if (!userCredits) {
       throw new UserError(
-        "You have no credits left, please buy more to create chatbots"
+        "You have no credits left, please buy more to create chat bots"
       );
     }
 
@@ -96,7 +96,7 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json({
       data: {
-        message: "Chatbot created successfully",
+        message: "Chat bot created successfully",
       },
     });
   } catch (error) {

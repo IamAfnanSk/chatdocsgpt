@@ -83,7 +83,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
           <DialogHeader>
             <DialogTitle>
               <span className="flex items-center gap-2 flex-wrap">
-                <span>chatdocgpt powered bot: {bot.name} </span>
+                <span>chatdocgpt powered chat bot: {bot.name} </span>
 
                 <Badge variant={"default"}>
                   <FlaskConicalIcon className="h-3 w-3 mr-1" />

@@ -36,7 +36,7 @@ const DashboardChatBotList: React.FC = async () => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <p className="font-medium text-lg">Your chatbots</p>
+        <p className="font-medium text-lg">Your chat bots</p>
 
         {userCredits > 0 ? (
           <div className="flex items-center gap-2">
@@ -65,17 +65,17 @@ const DashboardChatBotList: React.FC = async () => {
       </div>
 
       {chatbotsData && (
-        <div className="flex flex-col gap-5 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
           {chatbotsData.map((bot) => {
             return (
               <div key={bot.id} className="py-2 px-5 border rounded-md">
-                <div className="flex flex-col gap-2 justify-between">
-                  <p>{bot.name}</p>
-                  <p className="text-sm">{bot.description}</p>
+                <div className="flex flex-col gap-2 justify-between h-full">
+                  <p className="font-bold">{bot.name}</p>
+                  <p className="text-sm flex-1">{bot.description}</p>
                   <span className="text-xs">
                     Status:
                     <Badge className="ml-2" variant="secondary">
-                      {bot.status}
+                      {bot.is_disabled ? "disabled" : bot.status}
                     </Badge>
                   </span>
                 </div>
