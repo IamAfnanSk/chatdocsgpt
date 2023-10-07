@@ -26,7 +26,7 @@
     "next": "latest",
     "openai-edge": "^1.2.2",
     "parse-numeric-range": "^1.3.0",
-    "postcss": "8.4.24",
+    "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
