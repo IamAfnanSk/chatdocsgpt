@@ -30,6 +30,7 @@ import {
   User,
 } from "@supabase/auth-helpers-nextjs";
 import { Badge } from "./ui/badge";
+import toast from "react-hot-toast";
 
 const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
   bot,
@@ -46,10 +47,19 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    if (!authUser) {
+      (window as any).gtag?.("event", "asked-query-anonymously", {
+        query,
+      });
+      return toast.error("Please login to ask");
+    }
+
     (window as any).gtag?.("event", "asked-query", {
       query,
-      userId: authUser?.id,
+      userId: authUser.id,
     });
+
     complete(query);
   };
 

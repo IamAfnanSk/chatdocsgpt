@@ -23,23 +23,32 @@ const DashboardChatBotList: React.FC = async () => {
     .from("training_groups")
     .select("*");
 
-  const {
-    data: { credits: userCredits },
-  } = await supabase
+  const { data: userData } = await supabase
     .from("users")
-    .select("*")
+    .select("credits, is_admin")
     .eq("id", authUser.id)
     .limit(1)
     .maybeSingle();
 
   return (
     <>
+      {userData?.is_admin && (
+        <div className="mt-5 mb-5">
+          <Link
+            className="border-b border-dashed border-primary"
+            href={"/dashboard/dumping-ground"}
+          >
+            Visit dumping ground
+          </Link>
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <p className="font-medium text-lg">Your chat bots</p>
 
-        {userCredits > 0 ? (
+        {userData?.credits > 0 ? (
           <div className="flex items-center gap-2">
-            <p className="text-xs">{userCredits} credits left</p>
+            <p className="text-xs">{userData?.credits} credits left</p>
             <AddChatBotDialog />
           </div>
         ) : (

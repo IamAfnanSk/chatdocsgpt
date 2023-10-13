@@ -1,4 +1,5 @@
 import { Queue } from "bullmq";
+import { ChatCompletionRequestMessage } from "openai-edge";
 
 const {
   REDIS_CONNECTION_USERNAME,
@@ -30,3 +31,77 @@ const bullMQQueue = new Queue(BULLMQ_DOCS_PROCESSING_QUEUE_NAME, {
 });
 
 export { bullMQQueue };
+
+// Sync with supabase table definitions?
+export type TQueryDumpTableDefinitions = {
+  // generated
+  id: string;
+  created_at: number;
+
+  // passed
+  query_data: {
+    type: string;
+    data: TQueryDumpData;
+  };
+};
+
+export type TQueryDumpData = {
+  /**
+   * @deprecated legacy logging
+   */
+  maxCompletionTokens: number;
+
+  /**
+   * @deprecated legacy logging
+   */
+  temperature: number;
+
+  /**
+   * @deprecated legacy logging
+   */
+  stream: boolean;
+
+  /**
+   * @deprecated legacy logging
+   */
+  botId: string;
+
+  /**
+   * @deprecated legacy logging
+   */
+  model: string;
+
+  config: {
+    maxCompletionTokens: number;
+    temperature: number;
+    stream: boolean;
+    botId: string;
+    model: string;
+  };
+
+  input: ChatCompletionRequestMessage[];
+  output: string;
+
+  context: string;
+
+  query: string;
+  answer: string;
+
+  inputTokenCount: number;
+  outputTokenCount: number;
+  totalTokenCount: number;
+
+  inputCostInUSD: number;
+  outputCostInUSD: number;
+  totalCostInUSD: number;
+
+  userId: string;
+  userAvatarURL: string;
+  userFullName: string;
+  userEmail: string;
+
+  // Types for processed data
+  id?: string;
+  type?: string;
+  formattedDateString?: string;
+};

@@ -56,16 +56,14 @@ export const POST = async (request: NextRequest) => {
 
     const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
-    const {
-      data: { credits: userCredits },
-    } = await supabaseAdmin
+    const { data: userData } = await supabaseAdmin
       .from("users")
-      .select("*")
+      .select("credits")
       .eq("id", authUser.id)
       .limit(1)
       .maybeSingle();
 
-    if (!userCredits) {
+    if (!userData?.credits) {
       throw new UserError(
         "You have no credits left, please buy more to create chat bots"
       );

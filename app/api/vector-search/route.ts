@@ -12,6 +12,9 @@ import {
 } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { ApplicationError, UserError } from "@/lib/errors";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { TQueryDumpData, TQueryDumpTableDefinitions } from "@/global";
 
 const openAiKey = process.env.OPENAI_KEY;
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -66,7 +69,24 @@ export const POST = async (request: NextRequest) => {
       throw new UserError("Query is too long");
     }
 
-    const supabaseClient = createClient(supabaseUrl, supabaseServiceKey);
+    const supabase = createRouteHandlerClient({ cookies });
+
+    const {
+      data: { user: authUser },
+    } = await supabase.auth.getUser();
+
+    if (!authUser) {
+      throw new UserError("Please login and try again");
+    }
+
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+
+    const { data: userData } = await supabaseAdmin
+      .from("users")
+      .select("metadata, email")
+      .eq("id", authUser.id)
+      .limit(1)
+      .maybeSingle();
 
     const sanitizedQuery = query.trim();
 
@@ -101,7 +121,7 @@ export const POST = async (request: NextRequest) => {
       data: [{ embedding }],
     }: CreateEmbeddingResponse = await embeddingResponse.json();
 
-    const { error: matchError, data: pageSections } = await supabaseClient.rpc(
+    const { error: matchError, data: pageSections } = await supabaseAdmin.rpc(
       "match_page_sections",
       {
         embedding,
@@ -245,26 +265,53 @@ export const POST = async (request: NextRequest) => {
 
         const totalCostInUSD = inputCostInUSD + outputCostInUSD;
 
-        // Query dump to db
-        await supabaseClient.from("query_dump").insert({
-          query_data: {
-            type: "on-completion",
-            data: {
-              model,
-              botId: trainingGroupId,
-              maxCompletionTokens,
-              temperature,
-              stream,
-              input: messages,
-              output: completion,
-              inputTokenCount,
-              outputTokenCount,
-              totalTokenCount,
-              inputCostInUSD,
-              outputCostInUSD,
-              totalCostInUSD,
-            },
+        const dataToDump: TQueryDumpData = {
+          // legacy logging
+          maxCompletionTokens,
+          temperature,
+          stream,
+          botId: trainingGroupId,
+          model,
+
+          // latest logging
+          config: {
+            maxCompletionTokens,
+            temperature,
+            stream,
+            botId: trainingGroupId,
+            model,
           },
+
+          input: messages,
+          output: completion,
+
+          context: contextText,
+
+          query: sanitizedQuery,
+          answer: completion,
+
+          inputTokenCount,
+          outputTokenCount,
+          totalTokenCount,
+
+          inputCostInUSD,
+          outputCostInUSD,
+          totalCostInUSD,
+
+          userId: authUser.id,
+          userAvatarURL: userData?.metadata.avatar_url,
+          userFullName: userData?.metadata.full_name,
+          userEmail: userData?.email,
+        };
+
+        const query_data: TQueryDumpTableDefinitions["query_data"] = {
+          type: "on-completion",
+          data: dataToDump,
+        };
+
+        // Query dump to db
+        await supabaseAdmin.from("query_dump").insert({
+          query_data,
         });
       },
     });

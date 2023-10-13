@@ -19,7 +19,7 @@ import {
 import { LogoutButton } from "@/components/LogoutButton";
 import { LoginButton } from "@/components/LoginButton";
 import { BookMarkedIcon } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
 const MainNav: React.FC = () => {
   const [authUser, setAuthUser] = useState<User | null>(null);
