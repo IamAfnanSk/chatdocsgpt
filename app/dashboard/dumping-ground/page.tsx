@@ -8,6 +8,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 import Markdown from "@/components/Markdown";
 import { TQueryDumpData, TQueryDumpTableDefinitions } from "@/global";
+import { FormattedLocalDate } from "@/components/FormattedLocalDate";
 
 export const dynamic = "force-dynamic";
 
@@ -56,11 +57,6 @@ const DumpingGround: React.FC = async () => {
 
       const { created_at, id, query_data } = queryDump;
 
-      const formattedDateString = new Date(created_at).toLocaleString("en-IN", {
-        dateStyle: "long",
-        timeStyle: "long",
-      });
-
       // legacy support until migration done
       const { maxCompletionTokens, temperature, stream, botId, model } =
         query_data.data;
@@ -76,7 +72,7 @@ const DumpingGround: React.FC = async () => {
         },
         id,
         type: query_data.type,
-        formattedDateString,
+        createdAt: created_at,
       };
     }
   );
@@ -86,7 +82,7 @@ const DumpingGround: React.FC = async () => {
       <div className="flex flex-col gap-6">
         {processedQueryData.map(
           ({
-            formattedDateString,
+            createdAt,
             id,
             totalCostInUSD,
             userAvatarURL,
@@ -107,7 +103,7 @@ const DumpingGround: React.FC = async () => {
                 <div className="flex items-center flex-wrap justify-between">
                   <div>
                     <span className="font-medium">On: </span>
-                    {formattedDateString}
+                    <FormattedLocalDate timestamp={createdAt || 0} />
                   </div>
 
                   <div className="flex items-center gap-2">

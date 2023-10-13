@@ -103,5 +103,5 @@ export type TQueryDumpData = {
   // Types for processed data
   id?: string;
   type?: string;
-  formattedDateString?: string;
+  createdAt?: number;
 };
