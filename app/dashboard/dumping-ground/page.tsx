@@ -97,7 +97,7 @@ const DumpingGround: React.FC = async () => {
             answer,
             input,
             output,
-            config: { botId },
+            config: { botId, model },
           }) => {
             return (
               <div
@@ -159,28 +159,27 @@ const DumpingGround: React.FC = async () => {
                   {!userAvatarURL && <p>Anonymous user</p>}
                 </div>
 
-                {(query || input) && (
-                  <div className="mt-2">
-                    <span className="font-medium">Query: </span>
-                    {query || input[input.length - 1].content}
-                  </div>
-                )}
+                <div className="mt-2">
+                  <span className="font-medium">Query: </span>
+                  {query || input[input.length - 1].content}
+                </div>
 
-                {botId && (
-                  <div className="mt-2 flex gap-2 items-center">
-                    <span className="font-medium">Bot Id: </span>
-                    <Badge variant={"outline"}>{botId}</Badge>
-                  </div>
-                )}
+                <div>
+                  <p className="font-medium">Model: </p>
+                  {model}
+                </div>
 
-                {(answer || output) && (
-                  <div className="mt-2">
-                    <span className="font-medium">Answer: </span>
-                    <div className="mt-1">
-                      <Markdown markdown={answer || output} />
-                    </div>
+                <div className="mt-2 flex gap-2 items-center">
+                  <span className="font-medium">Bot Id: </span>
+                  <Badge variant={"outline"}>{botId}</Badge>
+                </div>
+
+                <div className="mt-2">
+                  <span className="font-medium">Answer: </span>
+                  <div className="mt-1">
+                    <Markdown markdown={answer || output} />
                   </div>
-                )}
+                </div>
               </div>
             );
           }
