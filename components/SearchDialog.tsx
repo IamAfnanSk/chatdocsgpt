@@ -111,7 +111,7 @@ const SearchDialog: React.FC<{ bot: any; disabled: boolean }> = ({
                 <span className="text-primary font-bold">Note:</span> We are
                 currently using{" "}
                 <span className="p-0.5 rounded-sm bg-slate-100">
-                  gpt-3.5-turbo
+                gpt-4o-mini
                 </span>{" "}
                 model to cut cost.{" "}
                 <span className="p-0.5 rounded-sm bg-slate-100">gpt-4</span>

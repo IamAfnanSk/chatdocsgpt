@@ -27,7 +27,7 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 
 // when changing this change costPer1kTokenInputInUSD and costPer1kTokenOutputInUSD variable too
-const model = "gpt-3.5-turbo-0613";
+const model = "gpt-4o-mini-2024-07-18";
 const maxCompletionTokens = 512;
 const temperature = 0;
 const stream = true;
